@@ -1,0 +1,4 @@
+# It recognizes dark themes by checking whether the keyword 'dark' exists as part of the name. If there is a dark theme but no 'dark' in its name, please add it here to help the app understand.
+# Note, theme name is case sensitive.
+dark_themes:
+  - windows-nt

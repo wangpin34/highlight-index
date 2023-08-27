@@ -1,0 +1,22 @@
+.card-container {
+  --syntax-background-color: #fefefe;
+  --syntax-font-color: #545454;
+  --background-color: #f1f5f9;
+  background-color: var(--syntax-background-color);
+}
+
+.card-container[data-theme=dark] {
+  --syntax-background-color: #2b2b2b;
+  --syntax-font-color: #f8f8f2;
+  --background-color: #000;
+}
+
+.frame {
+  background-color: var(--syntax-background-color);
+  color: var(--syntax-font-color);
+}
+
+.actions {
+  background-color: var(--background-color);
+  color: var(--syntax-font-color);
+}
