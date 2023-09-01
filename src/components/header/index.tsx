@@ -81,7 +81,7 @@ export default function Header() {
             variant="small"
             color="blue-gray"
             className="p-1 font-normal"
-          > <a href="https://github.com/wangpi/highlight-index">
+          > <a href="https://github.com/wangpin34/highlight-index">
             
                <Image
               src={githubLogo}
@@ -141,7 +141,7 @@ export default function Header() {
             variant="small"
             color="blue-gray"
             className="p-1 font-normal"
-          > <a href="https://github.com/wangpi/highlight-index">
+          > <a href="https://github.com/wangpin34/highlight-index">
             
                GitHub
             </a>
