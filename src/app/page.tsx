@@ -6,7 +6,7 @@ import Link from 'next/link'
 export default async function Home() {
   const config = await loadConfig()
   const themes = await getThemes()
-  const themesForHome = themes.slice(0,8)
+  const themesForHome = themes.slice(0,3)
   const isDark = (theme: string) => { 
     const index = config['dark_themes'].indexOf(theme)
     const hasDark = theme.toLowerCase().indexOf("dark") > -1 || theme.toLowerCase().indexOf("black") > -1
@@ -17,7 +17,7 @@ export default async function Home() {
       <div id="catalog">
         <div id="highlight-js-themes" className="bg-amber-950">
           <h1 className="text-lg text-amber-950">
-            highlight.js themes <Link href="/highlightjs" className="font-bold text-blue-600">More</Link>
+            highlight.js {themes.length} themes <Link href="/highlightjs" className="font-bold text-blue-600">View all</Link>
           </h1>
           <div className="flex gap-4 flex-wrap">
           {themesForHome?.map(theme => <ThemeCard key={theme} theme={theme} isDark={isDark(theme)} />)}
