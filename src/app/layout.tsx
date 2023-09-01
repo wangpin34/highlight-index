@@ -1,4 +1,3 @@
-"use client"
 import './globals.css'
 import 'material-icons/iconfont/material-icons.css'
 import type { Metadata } from 'next'

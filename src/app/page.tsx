@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 export default async function Home() {
   const config = await loadConfig()
-  const themes = await getThemes()
+  const themes = await listThemes()
   const themesForHome = themes.slice(0,3)
   const isDark = (theme: string) => { 
     const index = config['dark_themes'].indexOf(theme)
@@ -27,10 +27,3 @@ export default async function Home() {
     </main>
   )
 }
-
-
-export async function getThemes() {
-  const themes = await listThemes()
-  return themes
-}
- 

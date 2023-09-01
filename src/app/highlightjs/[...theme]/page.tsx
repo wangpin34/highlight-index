@@ -1,4 +1,4 @@
-import { listThemes } from "../../../utils/list-highlight.js-themes.mjs";
+import { listThemes } from "@/utils/list-highlight.js-themes.mjs";
 import hljs from "highlight.js";
 import styles from "./page.module.css";
 
