@@ -19,8 +19,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <div className="grid min-h-[140px] w-full place-items-center overflow-x-auto rounded-lg p-6 lg:overflow-visible">
-        <div className="-m-6  w-[calc(100%+48px)] overflow-auto">
+        <div className="grid min-h-[140px] max-h-screen w-full place-items-center overflow-x-auto rounded-lg p-6 lg:overflow-visible">
+        <div className="-m-6  w-[calc(100%+48px)]">
            <Header />
           {children}
         </div>
