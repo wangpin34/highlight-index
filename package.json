@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@material-tailwind/react": "^2.1.1",
-    "@radix-ui/react-select": "^1.2.2",
     "@types/js-yaml": "^4.0.5",
     "@types/node": "20.5.6",
     "@types/react": "18.2.21",
@@ -23,7 +22,6 @@
     "eslint-config-next": "13.4.19",
     "highlight.js": "^11.8.0",
     "js-yaml": "^4.1.0",
-    "lucide-react": "^0.270.0",
     "material-icons": "^1.13.10",
     "next": "13.4.19",
     "postcss": "8.4.28",

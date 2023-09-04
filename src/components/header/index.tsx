@@ -4,6 +4,7 @@ import Image from "next/image";
 import githubLogo from "./github-mark.png";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import classnames from 'classnames'
 import {
   Navbar,
   MobileNav,
@@ -46,7 +47,7 @@ export default function Header() {
             className="p-1 font-normal"
           >
             <Link
-              className={isActive ? "text-blue" : "text-black"}
+              className={classnames({'text-blue-700': isActive}, 'bg-slate-200 hover:text-blue-900 transition-colors')}
               href={link.href}
             >
               {link.name}
@@ -60,13 +61,13 @@ export default function Header() {
   return (
     <Navbar
       data-id="navbar"
-      className="sticky top-[-1.5rem] z-10 h-max max-w-full rounded-none py-2 px-4 lg:px-8 lg:py-4"
+      className="sticky top-[-1.5rem] z-10 h-max max-w-full rounded-none py-2 px-4 lg:px-8 lg:py-4 lg:top-0"
     >
       <div className="flex items-center justify-between text-blue-gray-900">
         <Typography
           as={Link}
           href="/"
-          className="mr-4 cursor-pointer py-1.5 font-medium"
+          className="mr-4 cursor-pointer py-1.5 font-medium hover:text-blue-500 transition-colors"
         >
           Highlight Index
         </Typography>
@@ -140,7 +141,7 @@ export default function Header() {
             key="github"
             variant="small"
             color="blue-gray"
-            className="p-1 font-normal"
+            className="p-1 font-normal hover:text-blue-900"
           >
             {" "}
             <a href="https://github.com/wangpin34/highlight-index">GitHub</a>

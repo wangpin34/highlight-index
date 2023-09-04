@@ -34,7 +34,7 @@ export default function ThemeCard({
       <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/${theme}.min.css"
-      ></link><pre data-code-theme="${theme}" style="background-color: var(--syntax-background-color); color: var(--syntax-font-color); margin: unset;"><code>${html}</code></pre>`;
+      ></link><pre data-code-theme="${theme}" class="hljs" style="margin: unset; padding: 8px;"><code>${html}</code></pre>`;
       }
     },
     [theme]
@@ -44,15 +44,15 @@ export default function ThemeCard({
       data-theme={cardTheme}
       className={classnames(
         styles["card-container"],
-        "border-solid border-2 border-slate-100 rounded-md"
+        "shadow-lg shadow-slate-200 rounded-md"
       )}
     >
-      <div ref={frameRef} className="p-4">
+      <div ref={frameRef}>
         <pre className={styles.frame} data-code-theme={theme}>
           <code>{code}</code>
         </pre>
       </div>
-      <div className={classnames(styles.actions, "px-2")}>
+      <div className={classnames('bg-slate-200', "px-2")}>
         <span className="text-xs">{theme}</span>
       </div>
     </section>
