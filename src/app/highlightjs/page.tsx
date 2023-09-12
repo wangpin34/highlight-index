@@ -1,34 +1,65 @@
 "use client";
-import ThemeCard from '@/components/theme-card'
-import loadConfig from "@/utils/load-config"
-import Header from '@/components/header'
-import { useEffect } from 'react'
-import useSWR from 'swr'
+import ThemeCard from "@/components/theme-card";
+import { Input } from "@material-tailwind/react";
 
-const fetcher = (url:string) => fetch(url).then(r => r.json())
+import { useState, useMemo, useEffect, useCallback } from 'react'
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
+import useDebounce from "@/hooks/useDebounce";
+import useSWR from "swr";
+import Fuse from 'fuse.js'
 
-export default function HighlightThemes() {
-  const { data, error, isLoading, mutate } = useSWR<{themes: string[]}>('/highlightjs/api', fetcher)
-  if (isLoading) {
-    return <div className="flex w-full h-full items-center py-4 px-6">
-      <div className="">
-      Loading...
-      </div>
-      </div>
-  }
-  if (error) {
-    return <div className="flex w-full h-full items-center py-4 px-6">
-    <span>error</span>
-    <button onClick={mutate}>Reload</button>
-    </div>
-  }
-  return <div className="py-4 px-6 flex items-center">Highlight js themes - {data?.themes?.length}
-  
-  <div className="flex gap-4 flex-wrap ">
-        {data?.themes?.map(theme => <ThemeCard key={theme} theme={theme} />)}  
-      </div>
-
-      </div>
+const fuseOptions = {
 }
 
- 
+const fetcher = (url: string) => fetch(url).then((r) => r.json());
+
+export default function HighlightThemes() {
+  const { data, error, isLoading, mutate } = useSWR<{ themes: string[] }>(
+    "/highlightjs/api",
+    fetcher
+    );
+  const pathname = usePathname()
+  const router = useRouter()
+  const searchParams = useSearchParams()
+  const [keyword, setKeyword] = useState<string>(searchParams.get('keyword') || '')
+  const query = useDebounce(keyword, 500)
+  const fuse = useMemo(() => new Fuse(data?.themes || [], fuseOptions), [data])
+  const themes = useMemo(() => query ? fuse.search(query).map(item => item.item) : data?.themes, [fuse, data, query])
+
+
+  useEffect(() => {
+    if (query) {
+      router.push(`${pathname}?keyword=${query}`, {scroll: false})
+    }
+  }, [query, router, pathname])
+
+  if (isLoading) {
+    return (
+      <div className="flex w-full h-full items-center py-4 px-6">
+        <div className="">Loading...</div>
+      </div>
+    );
+  }
+  if (error) {
+    return (
+      <div className="flex w-full h-full items-center py-4 px-6">
+        <span>error</span>
+        <button onClick={mutate}>Reload</button>
+      </div>
+    );
+  }
+  return (
+    <div className="py-4 px-6 flex flex-col items-center">
+      <div className="w-full py-2">
+        <div className="w-4">
+        <Input label="Search" icon={<span className="material-icons-outlined text-slate-400">search</span>} crossOrigin={undefined} value={keyword} onChange={e => setKeyword(e.target.value)}/>
+        </div>
+      </div>
+      <div className="flex gap-4 flex-wrap ">
+        {themes?.map((theme) => (
+          <ThemeCard key={theme} theme={theme} />
+        ))}
+      </div>
+    </div>
+  );
+}

@@ -25,7 +25,9 @@ export async function traverFile(file) {
         list.push(..._files)
       }
     } else {
-      files.push(f)
+      if (f.endsWith('.css')) {
+        files.push(f)
+      }
     }
   }
   return files
