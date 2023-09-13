@@ -57,7 +57,7 @@ export default function HighlightThemes() {
       </div>
       <div className="flex gap-4 flex-wrap ">
         {themes?.map((theme) => (
-          <ThemeCard key={theme} theme={theme} />
+          <ThemeCard key={theme} theme={theme} onClick={() => router.push(`${pathname}/${theme}`)}/>
         ))}
       </div>
     </div>

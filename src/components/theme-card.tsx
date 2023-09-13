@@ -3,23 +3,19 @@ import { useCallback, useMemo } from "react";
 import classnames from "classnames";
 import hljs from "highlight.js";
 import styles from "./theme-card.module.css";
+import jsCode from '@/code-snippets/js'
 
-const code = `import React from 'react'
-export default function App() {
-  return (
-    <div>I love React</div>
-  )
-}
-`;
 
-const html = hljs.highlight(code, { language: "typescript" }).value;
+const html = hljs.highlight(jsCode, { language: "typescript" }).value;
 
 export default function ThemeCard({
   theme,
   isDark,
+  onClick
 }: {
   theme: string;
   isDark?: boolean;
+  onClick: () => void
 }) {
   const cardTheme = useMemo(() => (isDark ? "dark" : "light"), [isDark]);
 
@@ -44,8 +40,9 @@ export default function ThemeCard({
       data-theme={cardTheme}
       className={classnames(
         styles["card-container"],
-        "shadow-lg shadow-slate-200 rounded-md"
+        "shadow-lg shadow-slate-200 rounded-md cursor-pointer hover:shadow-xl transition-shadow",
       )}
+      onClick={onClick}
     >
       <div ref={frameRef}>
         <pre className={styles.frame} data-code-theme={theme}>

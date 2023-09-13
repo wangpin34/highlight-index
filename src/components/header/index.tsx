@@ -7,14 +7,12 @@ import Link from "next/link";
 import classnames from 'classnames'
 import {
   Navbar,
-  MobileNav,
   Typography,
   IconButton,
   Collapse,
-  Card,
 } from "@material-tailwind/react";
 
-const navLinks: { name: string; href: string }[] = [
+const navLinks: { name: string; href: string, exact?: boolean }[] = [
   {
     name: "Highlight.js",
     href: "/highlightjs",
@@ -24,7 +22,7 @@ const navLinks: { name: string; href: string }[] = [
 export default function Header() {
   const [openNav, setOpenNav] = React.useState(false);
 
-  const pathname = usePathname();
+  const pathname = usePathname().replace(/\/$/, "");
 
   React.useEffect(() => {
     window.addEventListener(
@@ -36,7 +34,12 @@ export default function Header() {
   const navList = (
     <>
       {navLinks.map((link) => {
-        const isActive = pathname === link.href;
+        let isActive = false
+        if (link.exact) {
+          isActive = pathname === (link.href.replace(/\/$/, ""))
+        } else {
+          isActive = pathname.startsWith(link.href.replace(/\/$/, ""))
+        }
 
         return (
           <Typography

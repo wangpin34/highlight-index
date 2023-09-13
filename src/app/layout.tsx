@@ -22,7 +22,7 @@ export default function RootLayout({
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content="Code Highlight Index" />
         <meta name="twitter:description" content="Find code highlight themes with smart" />
-        <meta name="twitter:image" content="https://highlight-index.vercel.app/highlight themes -logos.jpeg" />
+        <meta name="twitter:image" content="https://highlight-index.vercel.app/highlight-themes-logos.jpeg" />
       </head>
       <body>
         <div className="grid min-h-[140px] max-h-screen w-full place-items-center overflow-x-auto rounded-lg p-6 lg:overflow-visible">
