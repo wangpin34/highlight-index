@@ -1,6 +1,5 @@
 import { listThemes } from "@/utils/list-highlight.js-themes.mjs";
 import ThemeCard from '@/components/theme-card'
-import loadConfig from "@/utils/load-config"
 import Link from 'next/link'
 
 export default async function Home() {
@@ -14,7 +13,7 @@ export default async function Home() {
             highlight.js {themes.length} themes <Link href="/highlightjs" className="font-bold text-blue-600">View all</Link>
           </h1>
           <div className="flex gap-4 flex-wrap">
-          {themesForHome?.map(theme => <ThemeCard key={theme} theme={theme} />)}
+          {themesForHome?.map(theme => <ThemeCard key={theme} theme={theme}/>)}
           </div>
         </div>
       </div>
