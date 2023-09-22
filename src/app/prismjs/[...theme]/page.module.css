@@ -1,0 +1,14 @@
+.frame-container {
+  --syntax-background-color: #fefefe;
+  --syntax-font-color: #545454;
+}
+
+.frame-container[data-theme=dark] {
+  --syntax-background-color: #2b2b2b;
+  --syntax-font-color: #f8f8f2;
+}
+
+.frame {
+  background-color: var(--syntax-background-color);
+  color: var(--syntax-font-color);
+}

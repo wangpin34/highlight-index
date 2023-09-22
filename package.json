@@ -21,14 +21,22 @@
     "fuse.js": "^6.6.2",
     "highlight.js": "^11.8.0",
     "js-yaml": "^4.1.0",
+    "jsdom": "^22.1.0",
     "material-icons": "^1.13.10",
     "next": "13.4.19",
     "postcss": "8.4.28",
+    "postcss-prefix-selector": "^1.16.0",
+    "postcss-selector-prefix": "^4.0.0",
+    "prismjs": "^1.29.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "swr": "^2.2.2",
     "tailwindcss": "3.3.3",
     "tailwindcss-animate": "^1.0.7",
     "typescript": "5.2.2"
+  },
+  "devDependencies": {
+    "@types/postcss-prefix-selector": "^1.16.0",
+    "@types/prismjs": "^1.26.0"
   }
 }

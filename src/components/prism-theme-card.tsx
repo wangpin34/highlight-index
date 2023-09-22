@@ -1,21 +1,30 @@
 "use client";
-import { useCallback } from "react";
+import { useCallback, useEffect, useRef, useMemo, useState } from "react";
 import classnames from "classnames";
-import hljs from "highlight.js";
+import Prism from 'prismjs'
+import 'prismjs/components/prism-typescript'
+
 import styles from "./theme-card.module.css";
 import jsCode from '@/code-snippets/js'
 import { snakeToNormal } from '@/utils/string-transformer'
 
-const html = hljs.highlight(jsCode, { language: "typescript" }).value;
-
 export default function ThemeCard({
   theme,
-  onClick
+  onClick,
+  language = 'typescript'
 }: {
   theme: string;
   onClick?: () => void
+  language?: string
 }) {
-
+  const languageRef = useRef(language)
+  const [languageLoaded, setLoaded] = useState<boolean>(false)
+  useEffect(() => {
+    import(`prismjs/components/prism-${languageRef.current}`).then(() => {
+      setLoaded(true)
+    })
+  }, [])
+  const html = useMemo(() =>  languageLoaded ? Prism.highlight(jsCode, Prism.languages.typescript, 'typescript') : '', [languageLoaded])
   const frameRef = useCallback(
     (node: HTMLDivElement) => {
       if (node) {
@@ -23,14 +32,16 @@ export default function ThemeCard({
         if (!shadowRoot) {
           shadowRoot = node.attachShadow({ mode: "open" });
         }
+        const styleLink = `https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/${theme === 'prism' ? 'prism' : 'prism-' + theme}.min.css`;
         shadowRoot.innerHTML = `
-      <link
+        <link
         rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/${theme}.min.css"
-      ></link><pre data-code-theme="${theme}" class="hljs language-typescript" style="margin: unset; padding: 8px;"><code>${html}</code></pre>`;
+        href="${styleLink}"
+      ></link>
+      <pre data-code-theme="${theme}" class="prism language-typescript" style="margin: unset; padding: 8px;"><code>${html}</code></pre>`;
       }
     },
-    [theme]
+    [theme, html]
   );
   return (
     <section
@@ -45,7 +56,7 @@ export default function ThemeCard({
       onClick={onClick}
     >
       <div ref={frameRef}>
-        <pre className={styles.frame} data-theme={theme}>
+        <pre className={classnames(styles.frame, 'prism lang-typescript')} data-theme={theme}>
           <code dangerouslySetInnerHTML={{ __html: html }}></code>
         </pre>
       </div>

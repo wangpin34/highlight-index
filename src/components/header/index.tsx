@@ -17,6 +17,10 @@ const navLinks: { name: string; href: string, exact?: boolean }[] = [
     name: "Highlight.js",
     href: "/highlightjs",
   },
+  {
+    name: "Prism.js",
+    href: "/prismjs",
+  },
 ];
 
 export default function Header() {
