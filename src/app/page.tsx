@@ -3,6 +3,8 @@ import { listThemes as ListPrismThemes } from "@/utils/list-prism.js-themes.mjs"
 import HljsThemeCard from '@/components/hljs-theme-card-server'
 import PrismThemeCard from '@/components/prism-theme-card-server'
 import Link from 'next/link'
+import Image from 'next/image'
+import Logo from './Theme_Hub-logos.jpeg'
 
 export default async function Home() {
   const highlightThemes = await listHighlightThemes()
@@ -12,7 +14,9 @@ export default async function Home() {
   const prismThemesForHome = prismThemes.slice(0,3)
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-8">
+    <main className="">
+      <Image src={Logo}  alt="logo"/>
+      <div className="flex min-h-screen flex-col items-center justify-between p-8">
       <div id="catalog">
         <div id="highlight-js-themes" className="bg-amber-950">
           <h1 className="text-lg text-amber-950">
@@ -31,6 +35,7 @@ export default async function Home() {
           {prismThemesForHome?.map(theme => <PrismThemeCard key={theme.name} theme={theme.name} uri={theme.uri}/>)}
           </div>
         </div>
+      </div>
       </div>
     </main>
   )
