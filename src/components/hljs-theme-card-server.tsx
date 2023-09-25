@@ -16,8 +16,8 @@ export default async function ThemeCard({
   language?: string
 }) {
  const rawStyle = await getRawHljsTheme(theme)
-  const css = prefixCSS(rawStyle, `.theme-${theme}`)
-  const html = hljsHightlight(jsCode)
+const css = prefixCSS(rawStyle, `.theme-${theme}`)
+const html = hljsHightlight(jsCode)
 
   return (
     <section

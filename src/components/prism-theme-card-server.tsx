@@ -1,5 +1,5 @@
 import classnames from "classnames";
-import { prismHighlight, getRawPrismTheme, getRawPrismThemeByURI, prefixCSS } from '@/utils/highlight-utils'
+import { prismHighlight, getRawPrismThemeByURI, prefixCSS } from '@/utils/highlight-utils'
 
 import styles from "./theme-card.module.css";
 import jsCode from '@/code-snippets/js'
