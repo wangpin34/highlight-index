@@ -4,9 +4,6 @@ import {fileURLToPath} from 'url'
 
 const __filename = fileURLToPath(import.meta.url)
 
-const base = path.resolve('node_modules/prismjs/themes')
-
-
 export async function isDir(file) {
   const stats = await fs.stat(file)
   return stats.isDirectory()
@@ -33,17 +30,29 @@ export async function traverFile(file) {
   return files
 }
 
-export async function listThemeCSSFiles() {
-  const files = await traverFile(base)
-  const names = files.map(file => path.relative(base,file)).map(uri => uri.replaceAll(path.sep, '/'))
-  return names
+const base = path.resolve('node_modules')
+const baseCore = path.join(base, 'prismjs/themes')
+const additional = path.join(base, 'prism-themes/themes')
+
+function fileToTheme(file, baseDir) {
+  const filename = path.basename(file)
+  const name = path.relative(baseDir, file).replace(/^prism-/, '').replace(/\.css$/, '')
+  const uri = path.relative(base, file).replaceAll(path.sep, '/')
+  const cdn = baseDir === additional ? `https://cdnjs.cloudflare.com/ajax/libs/prism-themes/1.9.0/${filename}` : `https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/${filename}`
+  return {
+    name,
+    uri,
+    cdn
+  }
 }
 
 export async function listThemes() {
-  const files = await listThemeCSSFiles()
-  return files.filter(file => !file.endsWith('.min.css')).map(file => file.replace(/^prism-/, '').replace(/\.css$/, ''))
+  const files0 = await traverFile(baseCore)
+  const files1 = await traverFile(additional)
+  const names0 = files0.filter(file => !file.endsWith('.min.css')).map(file => fileToTheme(file, baseCore))
+  const names1 = files1.filter(file => !file.endsWith('.min.css')).map(file => fileToTheme(file, additional))
+  return [...names0,...names1]
 }
-
 
 if(process.argv[1] === __filename) {
   listThemes().then(files => fs.writeFile('public/prism-js-themes.json', JSON.stringify(files), 'utf-8'))

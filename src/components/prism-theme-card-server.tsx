@@ -1,5 +1,5 @@
 import classnames from "classnames";
-import { prismHighlight, getRawPrismTheme, prefixCSS } from '@/utils/highlight-utils'
+import { prismHighlight, getRawPrismTheme, getRawPrismThemeByURI, prefixCSS } from '@/utils/highlight-utils'
 
 import styles from "./theme-card.module.css";
 import jsCode from '@/code-snippets/js'
@@ -7,15 +7,17 @@ import { snakeToNormal } from '@/utils/string-transformer'
 
 export default async function ThemeCard({
   theme,
+  uri,
   onClick,
   language = 'typescript'
 }: {
-  theme: string;
+  theme: string
+  uri: string
   onClick?: () => void
   language?: string
 }) {
   const selectorPrefix = `.${theme}`
-  const rawStyle = await getRawPrismTheme(theme)
+  const rawStyle = await getRawPrismThemeByURI(uri)
   const css = prefixCSS(rawStyle, selectorPrefix)
   const html = prismHighlight(jsCode, language)
   return (

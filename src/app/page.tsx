@@ -28,7 +28,7 @@ export default async function Home() {
             prism.js {prismThemes.length} themes <Link href="/prismjs" className="font-bold text-blue-600">View all</Link>
           </h1>
           <div className="flex gap-4 flex-wrap">
-          {prismThemesForHome?.map(theme => <PrismThemeCard key={theme} theme={theme}/>)}
+          {prismThemesForHome?.map(theme => <PrismThemeCard key={theme.name} theme={theme.name} uri={theme.uri}/>)}
           </div>
         </div>
       </div>

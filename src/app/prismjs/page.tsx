@@ -15,7 +15,7 @@ const fuseOptions = {
 const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
 export default function HighlightThemes() {
-  const { data, error, isLoading, mutate } = useSWR<{ themes: string[] }>(
+  const { data, error, isLoading, mutate } = useSWR<{ themes: {name: string, uri: string, cdn: string}[] }>(
     "/prismjs/api",
     fetcher
     );
@@ -50,16 +50,18 @@ export default function HighlightThemes() {
     );
   }
   return (
-    <div className="py-4 px-6 flex flex-col items-center">
-      <div className="w-full py-2">
-        <div className="w-4">
+    <div className="py-4 px-6 flex justify-center">
+      <div className="flex flex-col items-start w-full lg:w-4/5">
+      <div className="w-full md:w-4 py-2">
+        <div className="w-full">
         <Input label="Search" icon={<span className="material-icons-outlined text-slate-400">search</span>} crossOrigin={undefined} value={keyword} onChange={e => setKeyword(e.target.value)}/>
         </div>
       </div>
-      <div className="flex gap-4 flex-wrap ">
-        {themes?.map((theme) => (
-          <PrismThemeCard key={theme} theme={theme} onClick={() => router.push(`${pathname}/${theme}`)}/>
+      <div className="flex gap-4 flex-wrap mt-4">
+        {themes?.map(({name, uri, cdn}) => (
+          <PrismThemeCard key={name} theme={name} uri={uri} cdn={cdn} onClick={() => router.push(`${pathname}/${name}`)}/>
         ))}
+      </div>
       </div>
     </div>
   );

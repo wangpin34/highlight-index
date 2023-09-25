@@ -25,6 +25,7 @@ import hljs from "highlight.js";
 import postcss from "postcss";
 import prefixSelector from "postcss-prefix-selector";
 
+const nodemodules = path.resolve('node_modules')
 const prismBase = path.resolve("node_modules/prismjs/themes");
 const hljsBase = path.resolve("node_modules/highlight.js/styles");
 
@@ -63,6 +64,15 @@ export async function getRawPrismTheme(theme: string) {
   const filepath = path.join(
     prismBase,
     theme.startsWith("prism-") ? `${theme}.css` : `prism-${theme}.css`
+  );
+  const result = await fs.readFile(filepath, "utf-8");
+  return result;
+}
+
+export async function getRawPrismThemeByURI(uri: string) {
+  const filepath = path.join(
+    nodemodules,
+    uri
   );
   const result = await fs.readFile(filepath, "utf-8");
   return result;

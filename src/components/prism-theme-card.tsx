@@ -10,10 +10,14 @@ import { snakeToNormal } from '@/utils/string-transformer'
 
 export default function ThemeCard({
   theme,
+  uri,
+  cdn,
   onClick,
   language = 'typescript'
 }: {
-  theme: string;
+  theme: string
+  uri: string
+  cdn: string
   onClick?: () => void
   language?: string
 }) {
@@ -32,7 +36,7 @@ export default function ThemeCard({
         if (!shadowRoot) {
           shadowRoot = node.attachShadow({ mode: "open" });
         }
-        const styleLink = `https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/${theme === 'prism' ? 'prism' : 'prism-' + theme}.min.css`;
+        const styleLink = cdn
         shadowRoot.innerHTML = `
         <link
         rel="stylesheet"
@@ -41,13 +45,13 @@ export default function ThemeCard({
       <pre data-code-theme="${theme}" class="prism language-typescript" style="margin: unset; padding: 8px;"><code>${html}</code></pre>`;
       }
     },
-    [theme, html]
+    [theme, html, cdn]
   );
   return (
     <section
       className={classnames(
         styles["card-container"],
-        "shadow-lg shadow-slate-200 rounded-md transition-shadow",
+        "shadow-lg shadow-slate-200 rounded-md transition-shadow sm:w-full md:w-auto",
         {
           'hover:shadow-xl': !!onClick,
           'cursor-pointer': !!onClick,
@@ -56,7 +60,7 @@ export default function ThemeCard({
       onClick={onClick}
     >
       <div ref={frameRef}>
-        <pre className={classnames(styles.frame, 'prism lang-typescript')} data-theme={theme}>
+        <pre className={classnames(styles.frame, 'prism lang-typescript', theme)} data-theme={theme}>
           <code dangerouslySetInnerHTML={{ __html: html }}></code>
         </pre>
       </div>

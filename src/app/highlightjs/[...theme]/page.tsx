@@ -16,9 +16,9 @@ export default function HighlightDemo({
   const theme = params.theme.map((p) => camelToSnakeCase(p)).join("/");
   const styleLink = `https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/${theme}.min.css`;
   return (
-    <div className="p-6 h-full">
+    <div className="box-border lg:p-6 h-full">
       <link rel="stylesheet" href={styleLink}></link>
-      <div className="w-2/3 h-full m-auto shadow-md hover:shadow-lg rounded-lg">
+      <div className="w-full lg:w-2/3 h-full m-auto shadow-md hover:shadow-lg rounded-lg">
         <div className="hljs py-1 rounded-t-lg">
           <Link href="/highlightjs">
           <span className="material-symbols-outlined hljs-keyword" >arrow_back</span>

@@ -76,7 +76,7 @@ export default function Header() {
           href="/"
           className="mr-4 cursor-pointer py-1.5 font-medium hover:text-blue-500 transition-colors"
         >
-          Highlight Index
+          Theme Hub
         </Typography>
         <div className="flex items-center gap-4">
           <div className="mr-4 hidden lg:block">
@@ -151,7 +151,12 @@ export default function Header() {
             className="p-1 font-normal hover:text-blue-900"
           >
             {" "}
-            <a href="https://github.com/wangpin34/highlight-index">GitHub</a>
+            <a href="https://github.com/wangpin34/highlight-index"><Image
+                src={githubLogo}
+                alt="logo of github"
+                width="20"
+                height="20"
+              /></a>
           </Typography>
         </ul>
       </Collapse>
