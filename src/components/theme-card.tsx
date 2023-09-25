@@ -36,7 +36,7 @@ export default function ThemeCard({
     <section
       className={classnames(
         styles["card-container"],
-        "shadow-lg shadow-slate-200 rounded-md transition-shadow sm:w-full md:w-auto",
+        "shadow-lg shadow-slate-200 rounded-md transition-shadow grow",
         {
           'hover:shadow-xl': !!onClick,
           'cursor-pointer': !!onClick,
