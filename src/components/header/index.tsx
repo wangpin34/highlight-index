@@ -4,7 +4,7 @@ import { Heading, IconButton } from '@radix-ui/themes'
 export default function Header() {
   return (
     <nav className="w-screen h-16 fixed top-0 left-0 flex items-center shadow-sm">
-      <div className="relative w-full h-full flex items-center">
+      <div className="relative w-full h-full flex items-center px-6">
         <div className="flex-auto"></div>
         <Heading className="h-full absolute top-0 bottom-0 left-0 right-0 flex justify-center items-center text-slate-700">
           <span>Theme Hub</span>

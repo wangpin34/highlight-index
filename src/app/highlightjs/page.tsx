@@ -36,7 +36,7 @@ export default function HighlightThemes() {
         loading={isLoading}
         error={error}
         themes={themes ?? []}
-        themeRender={(theme) => <ThemeCard theme={theme} />}
+        themeRender={(theme) => <ThemeCard theme={theme} onClick={() => router.push(`${pathname}/${theme}`)} />}
         onReload={mutate}
       />
     </>
