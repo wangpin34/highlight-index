@@ -8,13 +8,13 @@ import Image from 'next/image'
 
 export default async function HighlightDemo({ params }: { params: { theme: string[] } }) {
   const theme = params.theme.join('/')
-  const themeMeta = await getThemeMeta(theme)
+  const metadata = await getThemeMeta(theme)
   const html = prismHighlight(jsCode, 'typescript')
   return (
     <>
-      <ThemeHeader title={themeMeta?.name ?? theme} backTo="/prism" />
+      <ThemeHeader title={metadata?.name ?? theme} backTo="/prism" />
       <div className="box-border lg:p-6 h-full px-6">
-        <link rel="stylesheet" href={themeMeta?.cdn}></link>
+        <link rel="stylesheet" href={metadata?.cdn}></link>
         <div className="w-2/3 h-full m-auto shadow-md hover:shadow-lg rounded-lg">
           <pre className="language-typescript rounded-br-none rounded-bl-none" data-code-theme={theme}>
             <code dangerouslySetInnerHTML={{ __html: html }}></code>
@@ -22,7 +22,7 @@ export default async function HighlightDemo({ params }: { params: { theme: strin
           <div className="px-2 py-4">
             <div className="flex flex-row items-center">
               <a
-                href={themeMeta?.github}
+                href={metadata?.github}
                 target="_blank"
                 className="ml-2 text-blue-600 x:text-blue-900 break-normal"
                 style={{ overflowWrap: 'anywhere' }}
