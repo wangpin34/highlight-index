@@ -3,6 +3,7 @@ import PrismThemeCard from '@/components/prism-theme-card'
 import Themes from '@/components/themes'
 import TopSearch from '@/components/top-search'
 import useDebounce from '@/hooks/useDebounce'
+import type { Theme } from '@/types/theme'
 import Fuse from 'fuse.js'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useEffect, useMemo, useState } from 'react'
@@ -13,7 +14,7 @@ const fuseOptions = { keys: ['name'] }
 const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
 export default function HighlightThemes() {
-  const { data, error, isLoading, mutate } = useSWR<{ themes: { name: string; uri: string; cdn: string }[] }>('/prismjs/api', fetcher)
+  const { data, error, isLoading, mutate } = useSWR<{ themes: Theme[] }>('/prism/api', fetcher)
   const pathname = usePathname()
   const router = useRouter()
   const searchParams = useSearchParams()

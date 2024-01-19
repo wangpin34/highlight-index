@@ -14,7 +14,6 @@ export default function ThemeHeader({ title, backTo }: { title: string; backTo: 
         <Heading className="w-full h-full absolute top-0 bottom-0 left-0 right-0 flex justify-center items-center text-slate-700">
           <span>{title}</span>
         </Heading>
-        <div aria-label="right actions" className="z-10"></div>
       </div>
     </div>
   )

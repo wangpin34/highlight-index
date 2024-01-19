@@ -1,5 +1,6 @@
 'use client'
 import jsCode from '@/code-snippets/js'
+import type { Theme } from '@/types/theme'
 import { snakeToNormal } from '@/utils/string-transformer'
 import classnames from 'classnames'
 import hljs from 'highlight.js'
@@ -8,7 +9,7 @@ import styles from './theme-card.module.css'
 
 const html = hljs.highlight(jsCode, { language: 'typescript' }).value
 
-export default function ThemeCard({ theme, onClick }: { theme: string; onClick?: () => void }) {
+export default function ThemeCard({ theme, onClick }: { theme: Theme; onClick?: () => void }) {
   const frameRef = useCallback(
     (node: HTMLDivElement) => {
       if (node) {
@@ -19,7 +20,7 @@ export default function ThemeCard({ theme, onClick }: { theme: string; onClick?:
         shadowRoot.innerHTML = `
       <link
         rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/${theme}.min.css"
+        href="${theme.cdn}"
       ></link><pre data-code-theme="${theme}" class="hljs language-typescript" style="margin: unset; padding: 8px;"><code>${html}</code></pre>`
       }
     },
@@ -39,7 +40,7 @@ export default function ThemeCard({ theme, onClick }: { theme: string; onClick?:
         </pre>
       </div>
       <div className={classnames('bg-slate-200', 'px-2')}>
-        <span className="text-xs">{snakeToNormal(theme)}</span>
+        <span className="text-xs">{snakeToNormal(theme.name)}</span>
       </div>
     </section>
   )

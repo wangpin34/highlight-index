@@ -14,14 +14,14 @@ export default async function Home() {
             title="highlight.js"
             logo={<Image src={hljsLogo} alt="highlight.js" width={24} height={24} className="inline-block mr-2" />}
             description={<>192 languages and 496 themes. Support Node.js and Deno.</>}
-            to="/highlightjs"
+            to="/hljs"
           />
 
           <Entry
             title="prism.js"
             logo={<Image src={prismLogo} alt="highlight.js" width={24} height={24} className="inline-block mr-2 bg-slate-950" />}
             description={<>192 languages and 496 themes. Support Node.js and Deno.</>}
-            to="/prismjs"
+            to="/prism"
           />
         </div>
       </main>

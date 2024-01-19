@@ -66,5 +66,5 @@ export async function listThemes() {
 }
 
 if (process.argv[1] === __filename) {
-  listThemes().then((files) => fs.writeFile('public/prism-js-themes.json', JSON.stringify(files), 'utf-8'))
+  listThemes().then((files) => fs.writeFile('data/prism-themes.json', JSON.stringify(files), 'utf-8'))
 }

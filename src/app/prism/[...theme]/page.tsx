@@ -3,16 +3,16 @@ import jsCode from '@/code-snippets/js'
 import ThemeHeader from '@/components/theme-header'
 import { prismHighlight } from '@/utils/highlight-utils'
 import { listThemes } from '@/utils/list-prism.js-themes.mjs'
-import { camelToSnakeCase, snakeToNormal } from '@/utils/string-transformer'
+import { getPrismTheme } from '@/utils/server-helper'
 import Image from 'next/image'
 
 export default async function HighlightDemo({ params }: { params: { theme: string[] } }) {
-  const theme = params.theme.map((p) => camelToSnakeCase(p)).join('/')
-  const themeMeta = await getThemeMeta(params.theme.join('/'))
+  const theme = params.theme.join('/')
+  const themeMeta = await getThemeMeta(theme)
   const html = prismHighlight(jsCode, 'typescript')
   return (
     <>
-      <ThemeHeader title={snakeToNormal(params.theme.join(' '))} backTo="/prismjs" />
+      <ThemeHeader title={themeMeta?.name ?? theme} backTo="/prism" />
       <div className="box-border lg:p-6 h-full px-6">
         <link rel="stylesheet" href={themeMeta?.cdn}></link>
         <div className="w-2/3 h-full m-auto shadow-md hover:shadow-lg rounded-lg">
@@ -38,14 +38,14 @@ export default async function HighlightDemo({ params }: { params: { theme: strin
 }
 
 export async function getThemeMeta(name: string) {
-  const themes = await listThemes()
-  return themes.find((theme) => theme.name === name)
+  const theme = await getPrismTheme(name)
+  return theme
 }
 
 export async function generateStaticParams() {
   const themes = await listThemes()
   const params = themes.map((theme) => ({
-    theme: [...theme.name.split('/')],
+    theme: [theme.name],
   }))
   return params
 }
