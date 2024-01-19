@@ -1,7 +1,7 @@
 'use client'
 import PrismThemeCard from '@/components/prism-theme-card'
-import { Input } from '@material-tailwind/react'
-
+import Themes from '@/components/themes'
+import TopSearch from '@/components/top-search'
 import useDebounce from '@/hooks/useDebounce'
 import Fuse from 'fuse.js'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
@@ -28,41 +28,18 @@ export default function HighlightThemes() {
     }
   }, [query, router, pathname])
 
-  if (isLoading) {
-    return (
-      <div className="flex w-full h-full items-center py-4 px-6">
-        <div className="">Loading...</div>
-      </div>
-    )
-  }
-  if (error) {
-    return (
-      <div className="flex w-full h-full items-center py-4 px-6">
-        <span>error</span>
-        <button onClick={mutate}>Reload</button>
-      </div>
-    )
-  }
   return (
-    <div className="py-4 px-6 flex justify-center">
-      <div className="flex flex-col items-start w-full lg:w-4/5">
-        <div className="w-full md:w-4 py-2">
-          <div className="w-full">
-            <Input
-              label="Search"
-              icon={<span className="material-icons-outlined text-slate-400">search</span>}
-              crossOrigin={undefined}
-              value={keyword}
-              onChange={(e) => setKeyword(e.target.value)}
-            />
-          </div>
-        </div>
-        <div className="flex gap-4 flex-wrap mt-4">
-          {themes?.map(({ name, uri, cdn }) => (
-            <PrismThemeCard key={name} theme={name} uri={uri} cdn={cdn} onClick={() => router.push(`${pathname}/${name}`)} />
-          ))}
-        </div>
-      </div>
-    </div>
+    <>
+      <TopSearch query={keyword} onChange={(query) => setKeyword(query)} />
+      <Themes
+        loading={isLoading}
+        error={error}
+        themes={themes ?? []}
+        themeRender={({ name, uri, cdn }) => (
+          <PrismThemeCard key={name} theme={name} uri={uri} cdn={cdn} onClick={() => router.push(`${pathname}/${name}`)} />
+        )}
+        onReload={mutate}
+      />
+    </>
   )
 }

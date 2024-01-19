@@ -1,42 +1,30 @@
-import { listThemes as listHighlightThemes } from "@/utils/list-highlight.js-themes.mjs";
-import { listThemes as ListPrismThemes } from "@/utils/list-prism.js-themes.mjs";
-import HljsThemeCard from '@/components/hljs-theme-card-server'
-import PrismThemeCard from '@/components/prism-theme-card-server'
-import Link from 'next/link'
+import Entry from '@/components/entry'
+import Header from '@/components/header'
 import Image from 'next/image'
-import Logo from './Theme_Hub-logos.jpeg'
+import hljsLogo from './hljs.png'
+import prismLogo from './prism.svg'
 
 export default async function Home() {
-  const highlightThemes = await listHighlightThemes()
-  const highlightThemesForHome = highlightThemes.slice(0,3)
-
-  const prismThemes = await ListPrismThemes()
-  const prismThemesForHome = prismThemes.slice(0,3)
-
   return (
-    <main className="">
-      <Image src={Logo}  alt="logo"/>
-      <div className="flex min-h-screen flex-col items-center justify-between p-8">
-      <div id="catalog">
-        <div id="highlight-js-themes" className="bg-amber-950">
-          <h1 className="text-lg text-amber-950">
-            highlight.js {highlightThemes.length} themes <Link href="/highlightjs" className="font-bold text-blue-600">View all</Link>
-          </h1>
-          <div className="flex gap-4 flex-wrap">
-          {highlightThemesForHome?.map(theme => <HljsThemeCard key={theme} theme={theme}/>)}
-          </div>
-        </div>
+    <>
+      <Header />
+      <main className="max-w-full">
+        <div className="max-w-full h-full p-4 flex gap-4 justify-center flex-wrap box-border">
+          <Entry
+            title="highlight.js"
+            logo={<Image src={hljsLogo} alt="highlight.js" width={24} height={24} className="inline-block mr-2" />}
+            description={<>192 languages and 496 themes. Support Node.js and Deno.</>}
+            to="/highlightjs"
+          />
 
-         <div id="prism-js-themes" className="bg-amber-950">
-          <h1 className="text-lg text-amber-950">
-            prism.js {prismThemes.length} themes <Link href="/prismjs" className="font-bold text-blue-600">View all</Link>
-          </h1>
-          <div className="flex gap-4 flex-wrap">
-          {prismThemesForHome?.map(theme => <PrismThemeCard key={theme.name} theme={theme.name} uri={theme.uri}/>)}
-          </div>
+          <Entry
+            title="prism.js"
+            logo={<Image src={prismLogo} alt="highlight.js" width={24} height={24} className="inline-block mr-2 bg-slate-950" />}
+            description={<>192 languages and 496 themes. Support Node.js and Deno.</>}
+            to="/prismjs"
+          />
         </div>
-      </div>
-      </div>
-    </main>
+      </main>
+    </>
   )
 }
