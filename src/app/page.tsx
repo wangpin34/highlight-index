@@ -20,7 +20,7 @@ export default async function Home() {
           <Entry
             title="prism.js"
             logo={<Image src={prismLogo} alt="highlight.js" width={24} height={24} className="inline-block mr-2 bg-slate-950" />}
-            description={<>192 languages and 496 themes. Support Node.js and Deno.</>}
+            description={<>Prism is a lightweight, extensible syntax highlighter, built with modern web standards in mind.</>}
             to="/prism"
           />
         </div>

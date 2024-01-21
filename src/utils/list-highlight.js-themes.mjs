@@ -40,7 +40,7 @@ export async function listThemeCSSFiles() {
 }
 
 function fileToTheme(file, baseDir) {
-  const filename = path.basename(file)
+  const filename = path.relative(baseDir, file).replace('.css', '.min.css')
   const name = path
     .relative(baseDir, file)
     .replace(/\.css$/, '')
