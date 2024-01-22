@@ -14,7 +14,7 @@ export default async function Highlight({ params }: { params: { theme: string[] 
     <>
       <ThemeHeader title={metadata?.name ?? theme} backTo="/hljs" />
       <link rel="stylesheet" href={metadata?.cdn} />
-      <Box className="p-8">
+      <Box className="p-4">
         <Card>
           <Box className="w-full lg:w-2/3 h-full m-auto shadow-md hover:shadow-lg rounded-lg">
             <pre className="hljs p-2" data-code-theme={theme}>

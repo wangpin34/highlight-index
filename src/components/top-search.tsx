@@ -28,7 +28,7 @@ export default function TopSearch({ onChange }: Props) {
 
   return (
     <Box
-      className="w-screen h-16 px-6 fixed top-0 left-0 flex items-center gap-4 shadow-sm z-10"
+      className="w-screen h-12 px-4 fixed top-0 left-0 flex items-center gap-4 shadow-sm z-10"
       style={{ background: 'var(--color-background)' }}
     >
       <Link href="/">

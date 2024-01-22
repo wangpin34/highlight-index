@@ -15,7 +15,7 @@ export default async function HighlightDemo({ params }: { params: { theme: strin
     <>
       <ThemeHeader title={metadata?.name ?? theme} backTo="/prism" />
       <link rel="stylesheet" href={metadata?.cdn} />
-      <Box className="p-8">
+      <Box className="p-4">
         <Card>
           <pre className="language-typescript rounded-br-none rounded-bl-none" data-code-theme={theme}>
             <code dangerouslySetInnerHTML={{ __html: html }}></code>

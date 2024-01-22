@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 export default function ThemeHeader({ title, backTo }: { title: string; backTo: string }) {
   return (
-    <div className="w-screen h-16 fixed top-0 left-0 flex items-center shadow-sm">
+    <div className="w-screen h-12 fixed top-0 left-0 flex items-center shadow-sm">
       <div className="relative w-full h-full flex items-center">
         <div aria-label="left actions" className="px-6 z-10">
           <Link href={backTo}>
